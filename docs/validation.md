@@ -14,6 +14,14 @@ Nine regression checks cover authentication, product listing, price formatting, 
 
 These are deterministic test results, not a sample of real AI-generated patches. The test count refers to lock configurations, not unique user sessions. A passing test suite does not establish the absence of other regressions.
 
+## 0.3 comparison acceptance checks
+
+- Product search: the matching product is displayed in both versions, but the unprotected version loses the Cart route and allows guest checkout. The protected version retains the route and denies checkout.
+- Free shipping: two backpacks at ₹1,499 each produce ₹1,598 without protection and ₹2,998 with protection. The ₹1,400 shortfall is illustrative and calculated from the fixture, not revenue saved.
+- Mobile navigation: the requested two-link menu is retained; the unprotected patch undercharges ₹99 for a cart with paid shipping and accepts unverified accounts.
+- Vary quantity, account, search and mobile menu state across both evaluated versions; turn protection off to confirm that the benefit disappears.
+- Browser verification covers the comparison, all three scenarios, shared controls, individual previews, patch application, code view, image loading and viewport widths from 320 to 1920 pixels.
+
 ## Next experiment: task-based usability test
 
 Recruit five to eight people who have built and iterated on an app with an AI-assisted builder. Use the same sample app and change request in two conditions: unprotected editing and Anchor-assisted editing. Counterbalance the order, use equivalent tasks, and capture actual time, actions, errors and successful completion. Ask participants to explain why a proposed edit was blocked and what they would do next. Do not claim savings from the demo's credit estimator.
