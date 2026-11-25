@@ -10,12 +10,12 @@ Anchor is an independent product prototype, not an integration with an existing 
 
 Open `index.html` in a modern browser. No installation is required.
 
-1. Compare **Before**, **Without Anchor** and **With Anchor** in the storefront preview.
-2. Open **Anchor** to lock or unlock features and inspect protected dependencies.
-3. Open **Review changes** to examine allowed and blocked patches.
-4. Open **Tests & impact** to compare regression results and adjust repair-credit assumptions.
-5. Apply the patch only when the regression and acceptance checks pass.
-6. Try the product search, free shipping and mobile navigation scenarios.
+1. Select a scenario (Product search, Free shipping or Mobile navigation) and click **Run demo**. The comparison opens by default with the same inputs in both versions.
+2. Change the shared account, search query or backpack quantity to see the actual behavior of both evaluated versions. Red highlights indicate incorrect results and green highlights indicate preserved behavior.
+3. For Free shipping, the default two-backpack order exposes an illustrative ₹1,400 shortfall without protection; the protected patch retains the correct total.
+4. Open **Anchor** to lock or unlock features and inspect dependencies. Open **Review changes** for patch details and **Test results** for regression and acceptance checks.
+5. Switch between **Before**, **Without Anchor** and **With Anchor** to use the complete storefront. Choose **Compare** to return to the side-by-side view.
+6. Apply a patch only after the regression and acceptance checks pass.
 
 ## What the MVP demonstrates
 
@@ -25,7 +25,7 @@ Open `index.html` in a modern browser. No installation is required.
 | Offer free shipping | 1 | 0 | Yes |
 | Simplify mobile navigation | 2 | 0 | Yes |
 
-Results are from the bundled fixture and executable tests, not production measurements. The repair-credit estimator uses configurable assumptions; it does not represent observed savings from a commercial service.
+Results are from the bundled fixture and executable tests, not production measurements. The repair-credit estimator uses configurable assumptions; it does not represent observed savings from a commercial service. The order shortfall is calculated from the sample cart and intended shipping policy, not from real sales.
 
 ## Development
 
@@ -41,7 +41,8 @@ node build.js
 | File | Purpose |
 | --- | --- |
 | `engine.js` | Fixture modules, dependency analysis, patch validation and regression tests |
-| `app.js` | Workspace, scenario routing, review flow and interactive storefront |
+| `app.js` | Workspace, guided demo, side-by-side comparison and interactive storefront |
+| `assets.js` | Original generated, optimized WebP product photography bundled locally |
 | `styles.css` | Responsive light and dark layouts |
 | `template.html` | Editor markup |
 | `build.js` | Standalone HTML generation |
@@ -58,4 +59,4 @@ node build.js
 
 AI-generated patches are predefined, not produced by an LLM. Dependency inspection and test execution are real for the bundled fixture; the evaluator executes application-owned fixture code only. Arbitrary prompts do not generate code. The demo does not process real transactions, connect to customer projects or publish to an external builder. The UI is independently implemented, not a copy of proprietary source code or branding.
 
-Deploy `index.html` as a static site; no backend is required. GitHub Pages can serve the repository root when configured.
+Deploy `index.html` as a static site; no backend is required. The [live demo](https://anchor-gtc3.onrender.com/) is hosted on Render. The build runs tests and packages the self-contained HTML.
