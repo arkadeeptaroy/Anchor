@@ -1,6 +1,6 @@
 # Product brief: Anchor
 
-Status: functional concept prototype, v0.3.0
+Status: functional concept prototype, v0.4.0
 
 ## Problem and target user
 
@@ -26,7 +26,9 @@ The feature is integrated into the editing workflow rather than presented as a s
 | P0 | Patch-context validation and code diff | Implemented |
 | P0 | Regression and acceptance test gate | Implemented |
 | P0 | Protected versus unprotected storefront comparison | Implemented with shared inputs and component highlights |
-| P0 | Guided demo and immediately visible regression/financial effects | Implemented |
+| P0 | Guided demo and immediately visible regression/financial effects | Implemented across six scenarios |
+| P0 | Theme, discount and catalog sorting regression coverage | Implemented |
+| P0 | Exhaustive lock and input stress testing | Implemented and reproducible |
 | P1 | Configurable repair-credit estimate | Implemented; illustrative |
 | P1 | Responsive editor, version history and appearance controls | Implemented for demo |
 | P1 | Validate workflow with real builders and collect task outcomes | Not started |

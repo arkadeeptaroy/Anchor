@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0
+
+- Add dark-mode, SAVE10 discount and price-sorting scenarios with shared interactive controls.
+- Model global color inversion, lost shipping fees, missing products and incorrect currency formatting as executable regressions.
+- Expand protection to eight feature groups and 14 regression checks plus scenario acceptance.
+- Add exhaustive lock combinations, seeded input stress, repeatability, malformed-input and Chromium browser checks.
+- Preserve the builder workspace and local product photography.
+
 ## 0.3.0
 
 - Default to a side-by-side comparison driven by identical user inputs and evaluated fixture code.
