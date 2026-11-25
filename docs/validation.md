@@ -9,18 +9,24 @@ Run `node test.js` from the repository root to reproduce the engine results.
 | Product search | 4 | 0 | 2 | Pass |
 | Free shipping | 1 | 0 | 1 | Pass |
 | Mobile navigation | 2 | 0 | 2 | Pass |
+| Dark mode | 1 | 0 | 1 | Pass |
+| Discount code | 2 | 0 | 1 | Pass |
+| Price sorting | 2 | 0 | 2 | Pass |
 
-Nine regression checks cover authentication, product listing, price formatting, quantity calculations, shipping totals, empty carts and navigation. Each scenario has a separate acceptance check. The test suite exercises all 16 lock selections for each of the three scenarios (48 combinations), verifies dependency protection for a shared pricing module, and rejects unknown files and non-matching patch contexts.
+Fourteen regression checks cover authentication, catalog completeness and INR formatting, quantity calculations, shipping totals and policy, empty carts, navigation, visual integrity, light mode, invalid coupons and default sorting. Each scenario has one additional acceptance check. The suite covers all 256 lock selections for each of six scenarios (1,536 configurations), 6,000 seeded input cases, 1,000 repeatability cycles (2,000 evaluations), and eight malformed patch/import/scenario cases. Each combination verifies that protected files remain byte-for-byte unchanged and that the acceptance gate blocks unsafe updates.
 
 These are deterministic test results, not a sample of real AI-generated patches. The test count refers to lock configurations, not unique user sessions. A passing test suite does not establish the absence of other regressions.
 
-## 0.3 comparison acceptance checks
+## 0.4 comparison acceptance checks
 
 - Product search: the matching product is displayed in both versions, but the unprotected version loses the Cart route and allows guest checkout. The protected version retains the route and denies checkout.
 - Free shipping: two backpacks at ₹1,499 each produce ₹1,598 without protection and ₹2,998 with protection. The ₹1,400 shortfall is illustrative and calculated from the fixture, not revenue saved.
 - Mobile navigation: the requested two-link menu is retained; the unprotected patch undercharges ₹99 for a cart with paid shipping and accepts unverified accounts.
-- Vary quantity, account, search and mobile menu state across both evaluated versions; turn protection off to confirm that the benefit disappears.
-- Browser verification covers the comparison, all three scenarios, shared controls, individual previews, patch application, code view, image loading and viewport widths from 320 to 1920 pixels.
+- Dark mode: unprotected global CSS inversion visibly corrupts product photography and reverses the palette in both light and dark settings. Anchor blocks the appearance patch while allowing theme selection.
+- Discount code: SAVE10 applies ₹300 off the default ₹2,998 cart; the unprotected patch removes the ₹99 shipping fee (₹2,698 vs ₹2,797 with protection). Invalid codes do not discount the order.
+- Price sorting: the unprotected patch removes the ₹899 desk lamp and relabels remaining prices as USD; the protected version retains three products, INR pricing and both sort directions.
+- Vary quantity, account, search, theme, coupon, sort and mobile menu state across both evaluated versions; turn protection off to confirm that the benefit disappears.
+- Browser stress testing (`python browser-stress.py`) passed 616 assertions in Chromium, including 60 repeated scenario/input cycles and 48 scenario/viewport pairs across eight widths (320–1920 px), with no JavaScript errors or external network requests. Both acceptance failure (locking the requested feature) and protection-off paths are exercised. The tests use DOM interactions in a real Chromium instance; they are not multi-user network load tests.
 
 ## Next experiment: task-based usability test
 
@@ -40,6 +46,7 @@ A real integration is required to measure actual commercial credit savings. Repo
 ## Release checks
 
 - Run `node test.js`.
+- Run `python browser-stress.py` in a Chromium/Playwright environment.
 - Run `node build.js` and confirm the generated HTML matches the committed file.
-- Open the standalone HTML and exercise all three scenarios, locks, review, code comparison and patch application.
+- Open the standalone HTML and exercise all six scenarios, locks, review, code comparison and patch application.
 - Verify that the browser makes no external requests and that desktop and mobile views remain usable.
